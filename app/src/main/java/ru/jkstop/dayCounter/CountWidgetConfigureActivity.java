@@ -1,4 +1,4 @@
-package ru.jkstop.wearetogether;
+package ru.jkstop.dayCounter;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;

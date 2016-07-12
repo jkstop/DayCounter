@@ -1,4 +1,4 @@
-package ru.jkstop.wearetogether;
+package ru.jkstop.dayCounter;
 
 import org.junit.Test;
 
