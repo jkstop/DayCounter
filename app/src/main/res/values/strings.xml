@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">DayCounter</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="configure">Configure</string>
+    <string name="appwidget_text">1234</string>
+    <string name="configure">Config</string>
     <string name="add_widget">Add widget</string>
+
+    <string name="transition_select_date">transition_select_date</string>
 </resources>
