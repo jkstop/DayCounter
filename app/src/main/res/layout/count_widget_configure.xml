@@ -109,6 +109,74 @@
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_notifications"
+                android:layout_below="@id/card_design"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/notification_head"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:padding="8dp"
+                        android:text="Уведомления"
+                        android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"/>
+
+                    <ru.jkstop.dayCounter.MyListView
+                        android:id="@+id/list_notif_period"
+                        android:layout_below="@id/notification_head"
+                        android:divider="@android:color/transparent"
+                        android:padding="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <!--RadioGroup
+                        android:padding="8dp"
+                        android:layout_below="@id/notification_head"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/check_10_days"
+                            android:text="@string/notification_10_days"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/check_mounth"
+                            android:text="@string/notification_mounth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/check_50_days"
+                            android:text="@string/notification_50_days"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/check_100_days"
+                            android:text="@string/notification_100_days"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/check_year"
+                            android:text="@string/notification_year"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RadioGroup-->
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
         </RelativeLayout>
     </ScrollView>
 

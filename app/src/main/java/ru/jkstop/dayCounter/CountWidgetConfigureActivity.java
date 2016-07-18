@@ -13,24 +13,36 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
 import android.util.SparseBooleanArray;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -47,10 +59,15 @@ public class CountWidgetConfigureActivity extends AppCompatActivity{
     private static TextView widgetPreviewText;
     private static TextView countText;
     private FloatingActionButton fabAddWidget;
+    private ListView listNotifPeriod;
+    private Set<String> checkedNotif = new HashSet<>();
+
 
     View.OnClickListener mOnClickListener = new View.OnClickListener() {
         public void onClick(View v) {
             final Context context = CountWidgetConfigureActivity.this;
+
+            SharedPrefs.setNotificationPeriod(checkedNotif, mAppWidgetId);
 
             // It is the responsibility of the configuration activity to update the app widget
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(App.getContext());
@@ -61,6 +78,19 @@ public class CountWidgetConfigureActivity extends AppCompatActivity{
             resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
             setResult(RESULT_OK, resultValue);
             finish();
+        }
+    };
+
+    AppCompatCheckBox.OnCheckedChangeListener onCheckListener = new AppCompatCheckBox.OnCheckedChangeListener(){
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            if (b){
+                checkedNotif.add(compoundButton.getText().toString());
+            } else {
+                checkedNotif.remove(compoundButton.getText().toString());
+            }
+
+
         }
     };
 
@@ -158,6 +188,11 @@ public class CountWidgetConfigureActivity extends AppCompatActivity{
         fabAddWidget = (FloatingActionButton)findViewById(R.id.fab_add_widget);
         fabAddWidget.setOnClickListener(mOnClickListener);
 
+        checkedNotif = SharedPrefs.getNotificationPeriod(mAppWidgetId);
+
+        listNotifPeriod = (ListView)findViewById(R.id.list_notif_period);
+        listNotifPeriod.setAdapter(new adapterListNotifPeriod(Arrays.asList(getResources().getStringArray(R.array.notifications_entries))));
+
     }
 
     public static String calculateDatesDiff(int widgetId){
@@ -205,6 +240,7 @@ public class CountWidgetConfigureActivity extends AppCompatActivity{
         private static final String TEXT_SIZE = "text_size_";
         private static final String CURRENT_DESIGN = "current_design_";
         private static final String CURRENT_COLOR = "current_color_";
+        private static final String NOTIF_PERIOD = "notification_period_";
 
         private static SharedPreferences getDefaultPreferences(){
             return PreferenceManager.getDefaultSharedPreferences(App.getContext());
@@ -318,6 +354,19 @@ public class CountWidgetConfigureActivity extends AppCompatActivity{
             getDefaultPreferencesEditor().remove(CURRENT_COLOR + widgetId).apply();
         }
 
+        //периодичность уведомлений
+        public static void setNotificationPeriod(Set<String> entries, int widgetId){
+            getDefaultPreferencesEditor().putStringSet(NOTIF_PERIOD + widgetId, entries).apply();
+        }
+
+        public static Set<String> getNotificationPeriod(int widgetId){
+            return getDefaultPreferences().getStringSet(NOTIF_PERIOD + widgetId, new HashSet<String>());
+        }
+
+        public static void deleteNotificationPeriod(int widgetId){
+            getDefaultPreferencesEditor().remove(NOTIF_PERIOD + widgetId).apply();
+        }
+
         public static void deleteAllWidgetPrefs(int widgetId){
             System.out.println("clear preference for widget " + widgetId);
             deleteWidgetStartDate(widgetId);
@@ -326,7 +375,9 @@ public class CountWidgetConfigureActivity extends AppCompatActivity{
             deleteColorIndex(widgetId);
             deleteWidgetDesign(widgetId);
             deleteWidgetColor(widgetId);
+            deleteNotificationPeriod(widgetId);
         }
+
     }
 
     private class recyclerAdapter extends RecyclerView.Adapter{
@@ -436,5 +487,42 @@ public class CountWidgetConfigureActivity extends AppCompatActivity{
         }
 
     }
+
+    private class adapterListNotifPeriod extends BaseAdapter{
+
+        private List<String> items;
+
+        public adapterListNotifPeriod(List<String> items){
+            this.items = items;
+        }
+
+        @Override
+        public int getCount() {
+            return items.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return items.get(i);
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return items.indexOf(items.get(i));
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            CheckBox checkBox = new CheckBox(context);
+            checkBox.setText(items.get(i));
+            checkBox.setOnCheckedChangeListener(onCheckListener);
+
+            if (checkedNotif.contains(items.get(i))){
+                checkBox.setChecked(true);
+            }
+            return checkBox;
+        }
+    }
+
 }
 

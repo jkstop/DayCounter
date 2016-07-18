@@ -1,18 +1,24 @@
 package ru.jkstop.dayCounter;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.support.v7.app.NotificationCompat;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Implementation of App Widget functionality.
@@ -21,6 +27,8 @@ import java.util.GregorianCalendar;
 public class CountWidget extends AppWidgetProvider {
 
     private static final String UPDATE_WIDGET = "update_widget";
+
+    NotificationManager notificationManager;
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
@@ -47,7 +55,38 @@ public class CountWidget extends AppWidgetProvider {
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
 
-        System.out.println("update app widget " + appWidgetId);
+        //if (needNotification(Integer.valueOf(CountWidgetConfigureActivity.calculateDatesDiff(appWidgetId)), appWidgetId)){
+        //    sendNotif(appWidgetId, "message widget");
+       // }
+
+        needNotification(Integer.valueOf(CountWidgetConfigureActivity.calculateDatesDiff(appWidgetId)), appWidgetId);
+
+       // System.out.println("update app widget " + appWidgetId);
+    }
+
+    private static void sendNotif(int widgetId, String message){
+        NotificationCompat.Builder builder = (NotificationCompat.Builder) new NotificationCompat.Builder(App.getContext())
+                .setSmallIcon(R.drawable.bell_outline)
+                .setAutoCancel(true)
+                .setTicker("Ticker")
+                .setContentText(message + " " + widgetId)
+                .setContentIntent(null)
+                .setWhen(System.currentTimeMillis())
+                .setContentTitle("Content title")
+                .setDefaults(Notification.DEFAULT_ALL);
+
+        Notification notification = builder.getNotification();
+
+        NotificationManager notificationManager = (NotificationManager)App.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(widgetId, notification);
+    }
+
+    private static void needNotification(int passedDays, int widgetId){
+        Set<String> notifSettings = CountWidgetConfigureActivity.SharedPrefs.getNotificationPeriod(widgetId);
+        Resources resources = App.getContext().getResources();
+        if (passedDays % 10 == 0 && notifSettings.contains(resources.getString(R.string.notification_10_days))){
+            sendNotif(widgetId, "10 days!!!");
+        }
     }
 
     @Override
@@ -85,6 +124,8 @@ public class CountWidget extends AppWidgetProvider {
         // Enter relevant functionality for when the first widget is created
 
         System.out.println("widget enabled id " + CountWidgetConfigureActivity.mAppWidgetId);
+
+        notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 0);
