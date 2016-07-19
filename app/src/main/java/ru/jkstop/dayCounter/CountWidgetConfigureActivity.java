@@ -52,6 +52,11 @@ public class CountWidgetConfigureActivity extends AppCompatActivity{
 
 
     public  static int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+    public static final String NOTIF_10_D = App.getContext().getResources().getString(R.string.notification_10_days);
+    public static final String NOTIF_1_M = App.getContext().getResources().getString(R.string.notification_mounth);
+    public static final String NOTIF_50_D = App.getContext().getResources().getString(R.string.notification_50_days);
+    public static final String NOTIF_100_D = App.getContext().getResources().getString(R.string.notification_100_days);
+    public static final String NOTIF_1_Y = App.getContext().getResources().getString(R.string.notification_year);
 
     private CardView cardDate;
     private Context context;
@@ -61,7 +66,7 @@ public class CountWidgetConfigureActivity extends AppCompatActivity{
     private FloatingActionButton fabAddWidget;
     private ListView listNotifPeriod;
     private Set<String> checkedNotif = new HashSet<>();
-
+    private ArrayList<String> notificationItems = new ArrayList<>();
 
     View.OnClickListener mOnClickListener = new View.OnClickListener() {
         public void onClick(View v) {
@@ -190,8 +195,14 @@ public class CountWidgetConfigureActivity extends AppCompatActivity{
 
         checkedNotif = SharedPrefs.getNotificationPeriod(mAppWidgetId);
 
+        notificationItems.add(NOTIF_10_D);
+        notificationItems.add(NOTIF_1_M);
+        notificationItems.add(NOTIF_50_D);
+        notificationItems.add(NOTIF_100_D);
+        notificationItems.add(NOTIF_1_Y);
+
         listNotifPeriod = (ListView)findViewById(R.id.list_notif_period);
-        listNotifPeriod.setAdapter(new adapterListNotifPeriod(Arrays.asList(getResources().getStringArray(R.array.notifications_entries))));
+        listNotifPeriod.setAdapter(new adapterListNotifPeriod(notificationItems));
 
     }
 

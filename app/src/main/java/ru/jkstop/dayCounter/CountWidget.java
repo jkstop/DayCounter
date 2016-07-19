@@ -14,11 +14,13 @@ import android.support.v7.app.NotificationCompat;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Implementation of App Widget functionality.
@@ -65,14 +67,13 @@ public class CountWidget extends AppWidgetProvider {
     }
 
     private static void sendNotif(int widgetId, String message){
+        DateFormat format = DateFormat.getDateInstance();
         NotificationCompat.Builder builder = (NotificationCompat.Builder) new NotificationCompat.Builder(App.getContext())
                 .setSmallIcon(R.drawable.bell_outline)
                 .setAutoCancel(true)
-                .setTicker("Ticker")
-                .setContentText(message + " " + widgetId)
-                .setContentIntent(null)
+                .setContentText(message + " с " + format.format(new Date(CountWidgetConfigureActivity.SharedPrefs.getWidgetStartDate(widgetId))))
                 .setWhen(System.currentTimeMillis())
-                .setContentTitle("Content title")
+                .setContentTitle("Важная дата!")
                 .setDefaults(Notification.DEFAULT_ALL);
 
         Notification notification = builder.getNotification();
@@ -83,10 +84,73 @@ public class CountWidget extends AppWidgetProvider {
 
     private static void needNotification(int passedDays, int widgetId){
         Set<String> notifSettings = CountWidgetConfigureActivity.SharedPrefs.getNotificationPeriod(widgetId);
-        Resources resources = App.getContext().getResources();
-        if (passedDays % 10 == 0 && notifSettings.contains(resources.getString(R.string.notification_10_days))){
-            sendNotif(widgetId, "10 days!!!");
+        Long startDate = CountWidgetConfigureActivity.SharedPrefs.getWidgetStartDate(widgetId);
+
+        Calendar startDateCalendar = new GregorianCalendar();
+        startDateCalendar.setTimeInMillis(startDate);
+
+        Calendar nowCalendar = Calendar.getInstance();
+
+        if (nowCalendar.get(Calendar.MONTH) == startDateCalendar.get(Calendar.MONTH) &&
+                nowCalendar.get(Calendar.DAY_OF_MONTH) == startDateCalendar.get(Calendar.DAY_OF_MONTH) &&
+                notifSettings.contains(CountWidgetConfigureActivity.NOTIF_1_Y)){
+            //если прошел год
+            int diffYear = nowCalendar.get(Calendar.YEAR) - startDateCalendar.get(Calendar.YEAR);
+            sendNotif(widgetId, diffYear + decline(Calendar.YEAR, diffYear));
+
+        } else if (passedDays % 100 == 0 && notifSettings.contains(CountWidgetConfigureActivity.NOTIF_100_D)){
+            //прошло 100 дней
+            sendNotif(widgetId, passedDays + decline(Calendar.DAY_OF_MONTH, passedDays));
+        } else if (passedDays % 50 == 0 && notifSettings.contains(CountWidgetConfigureActivity.NOTIF_50_D)){
+            //прошло 50 дней
+            sendNotif(widgetId,passedDays + decline(Calendar.DAY_OF_MONTH, passedDays));
+        }else if (nowCalendar.get(Calendar.DAY_OF_MONTH) == startDateCalendar.get(Calendar.DAY_OF_MONTH) &&
+                notifSettings.contains(CountWidgetConfigureActivity.NOTIF_1_M)){
+            //прошел месяц
+            int diffYear = nowCalendar.get(Calendar.YEAR) - startDateCalendar.get(Calendar.YEAR);
+            int monthCount = diffYear * 12 + nowCalendar.get(Calendar.MONTH) - startDateCalendar.get(Calendar.MONTH);
+            sendNotif(widgetId, monthCount + decline(Calendar.MONTH, monthCount));
+        } else if (passedDays % 10 == 0 && notifSettings.contains(CountWidgetConfigureActivity.NOTIF_10_D)){
+            //прошло 10 дней
+            sendNotif(widgetId,passedDays + decline(Calendar.DAY_OF_MONTH, passedDays));
         }
+
+    }
+
+    private static String decline(int what, int value){
+        String out = "";
+        switch (what){
+            case Calendar.YEAR:
+                if (value == 1 || value%10 == 1){
+                    out = " год";
+                } else if (value < 5 || (value%10 < 5 && value%10 != 0)){
+                    out = " года";
+                } else{
+                    out = " лет";
+                }
+                break;
+            case Calendar.MONTH:
+                if (value == 1 || value%10 == 1){
+                    out = " месяц";
+                } else if (value < 5 || (value%10 < 5 && value%10 != 0)){
+                    out = " месяца";
+                } else{
+                    out = " месяцев";
+                }
+                break;
+            case Calendar.DAY_OF_MONTH:
+                if (value == 1 || value%10 == 1){
+                    out = " день";
+                } else if (value < 5 || (value%10 < 5 && value%10 != 0)){
+                    out = " дня";
+                } else{
+                    out = " дней";
+                }
+                break;
+            default:
+                break;
+        }
+        return out;
     }
 
     @Override

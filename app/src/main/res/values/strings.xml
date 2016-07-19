@@ -6,14 +6,6 @@
 
     <string name="transition_select_date">transition_select_date</string>
 
-    <string-array name="notifications_entries">
-        <item>10 дней</item>
-        <item>Месяц</item>
-        <item>50 дней</item>
-        <item>100 дней</item>
-        <item>Год</item>
-    </string-array>
-
     <string name="notification_10_days">10 дней</string>
     <string name="notification_mounth">Месяц</string>
     <string name="notification_50_days">50 дней</string>
