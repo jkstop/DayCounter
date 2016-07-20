@@ -5,19 +5,19 @@ import android.util.AttributeSet;
 import android.widget.ListView;
 
 /**
- * Created by ivsmirnov on 18.07.2016.
+ * ListView с высотой по содержимому
  */
-public class MyListView extends ListView {
+public class ExpandedListView extends ListView {
 
-    public MyListView(Context context, AttributeSet attrs) {
+    public ExpandedListView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MyListView(Context context) {
+    public ExpandedListView(Context context) {
         super(context);
     }
 
-    public MyListView(Context context, AttributeSet attrs, int defStyle) {
+    public ExpandedListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 

@@ -1,10 +1,5 @@
 <resources>
-    <string name="app_name">DayCounter</string>
-    <string name="appwidget_text">1234</string>
-    <string name="configure">Config</string>
-    <string name="add_widget">Add widget</string>
-
-    <string name="transition_select_date">transition_select_date</string>
+    <string name="app_name">Счётчик</string>
 
     <string name="notification_10_days">10 дней</string>
     <string name="notification_mounth">Месяц</string>
@@ -12,4 +7,13 @@
     <string name="notification_100_days">100 дней</string>
     <string name="notification_year">Год</string>
 
+    <string name="card_start_date_title">Начало остчёта</string>
+    <string name="card_widget_design_title">Внешний вид</string>
+    <string name="card_widget_design_subtitle_style">Стиль</string>
+    <string name="card_widget_design_subtitle_color">Цвет</string>
+    <string name="card_widget_design_subtitle_text_size">Внешний вид</string>
+    <string name="card_notification_settings_title">Напоминания</string>
+
+    <string name="notification_title">Сегодня важная дата!</string>
+    <string name="notification_start_count">Начат остчёт</string>
 </resources>

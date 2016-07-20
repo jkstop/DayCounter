@@ -13,10 +13,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!--Start date card-->
             <android.support.v7.widget.CardView
-                android:id="@+id/card_date"
-                app:cardElevation="5dp"
+                android:id="@id/card_start_date"
+                app:cardElevation="@dimen/card_elevation"
                 app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/card_content_padding"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
@@ -28,34 +30,36 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/count_head"
+                        android:id="@id/card_start_date_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:padding="8dp"
-                        android:text="Начало отсчета"
+                        android:paddingLeft="@dimen/horizontal_content_padding"
+                        android:paddingRight="@dimen/horizontal_content_padding"
+                        android:text="@string/card_start_date_title"
                         android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"/>
 
                     <TextView
-                        android:id="@+id/count_text"
+                        android:id="@id/card_start_date_count"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:text="-- -- ----"
-                        android:padding="8dp"
-                        android:layout_below="@id/count_head"
+                        android:paddingTop="@dimen/vertical_content_padding"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/card_start_date_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
+            <!--Widget design card-->
             <android.support.v7.widget.CardView
-                android:id="@+id/card_design"
-                app:cardElevation="5dp"
+                android:id="@id/card_widget_design"
+                app:cardElevation="@dimen/card_elevation"
+                app:contentPadding="@dimen/card_content_padding"
                 app:cardUseCompatPadding="true"
-                android:layout_below="@id/card_date"
-                android:transitionName="@string/transition_select_date"
+                android:layout_below="@id/card_start_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -64,55 +68,104 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/design_head"
+                        android:id="@id/card_widget_design_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/horizontal_content_padding"
+                        android:paddingRight="@dimen/horizontal_content_padding"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:padding="8dp"
-                        android:text="Внешний вид"
+                        android:text="@string/card_widget_design_title"
                         android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"/>
 
                     <include
-                        android:id="@+id/design_preview"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_below="@id/design_head"
+                        android:id="@id/card_widget_design_preview"
+                        android:layout_width="@dimen/widget_preview_design_size"
+                        android:layout_height="@dimen/widget_preview_design_size"
+                        android:layout_below="@id/card_widget_design_title"
                         android:layout_centerHorizontal="true"
                         layout="@layout/count_widget"/>
 
-                    <android.support.v7.widget.RecyclerView
-                        android:layout_below="@id/design_preview"
-                        android:id="@+id/design_view"
-                        android:padding="8dp"
+                    <LinearLayout
+                        android:id="@id/card_widget_design_container_style"
+                        android:layout_below="@id/card_widget_design_preview"
+                        android:paddingTop="@dimen/vertical_content_padding"
                         android:layout_centerHorizontal="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/design_color"
-                        android:layout_below="@id/design_view"
-                        android:padding="8dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <android.support.v7.widget.AppCompatSeekBar
-                        android:id="@+id/design_text_size"
-                        android:layout_below="@id/design_color"
-                        android:padding="8dp"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content">
 
+                        <TextView
+                            android:id="@id/card_widget_design_style_subtitle"
+                            android:text="@string/card_widget_design_subtitle_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@id/card_widget_design_style_recycler"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@id/card_widget_design_container_color"
+                        android:layout_below="@id/card_widget_design_container_style"
+                        android:paddingTop="@dimen/vertical_content_padding"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@id/card_widget_design_color_subtitle"
+                            android:text="@string/card_widget_design_subtitle_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@id/card_widget_design_color_recycler"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@id/card_widget_design_container_text_size"
+                        android:layout_below="@id/card_widget_design_container_color"
+                        android:paddingTop="@dimen/vertical_content_padding"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@id/card_widget_design_text_size_subtitle"
+                            android:text="@string/card_widget_design_subtitle_text_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                        <android.support.v7.widget.AppCompatSeekBar
+                            android:id="@id/card_widget_design_text_size_seekbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
+            <!--Notification settings card-->
             <android.support.v7.widget.CardView
-                android:id="@+id/card_notifications"
-                android:layout_below="@id/card_design"
-                app:cardElevation="5dp"
+                android:id="@id/card_notification_settings"
+                android:layout_below="@id/card_widget_design"
+                app:cardElevation="@dimen/card_elevation"
+                app:contentPadding="@dimen/card_content_padding"
                 app:cardUseCompatPadding="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -122,57 +175,24 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/notification_head"
+                        android:id="@id/card_notification_settings_title"
+                        android:paddingLeft="@dimen/horizontal_content_padding"
+                        android:paddingRight="@dimen/horizontal_content_padding"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:padding="8dp"
-                        android:text="Уведомления"
+                        android:text="@string/card_notification_settings_title"
                         android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"/>
 
-                    <ru.jkstop.dayCounter.MyListView
-                        android:id="@+id/list_notif_period"
-                        android:layout_below="@id/notification_head"
+                    <ru.jkstop.dayCounter.ExpandedListView
+                        android:id="@id/card_notification_settings_list"
+                        android:layout_below="@id/card_notification_settings_title"
                         android:divider="@android:color/transparent"
-                        android:padding="8dp"
+                        android:paddingTop="@dimen/vertical_content_padding"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
-
-                    <!--RadioGroup
-                        android:padding="8dp"
-                        android:layout_below="@id/notification_head"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <android.support.v7.widget.AppCompatCheckBox
-                            android:id="@+id/check_10_days"
-                            android:text="@string/notification_10_days"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <android.support.v7.widget.AppCompatCheckBox
-                            android:id="@+id/check_mounth"
-                            android:text="@string/notification_mounth"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <android.support.v7.widget.AppCompatCheckBox
-                            android:id="@+id/check_50_days"
-                            android:text="@string/notification_50_days"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <android.support.v7.widget.AppCompatCheckBox
-                            android:id="@+id/check_100_days"
-                            android:text="@string/notification_100_days"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <android.support.v7.widget.AppCompatCheckBox
-                            android:id="@+id/check_year"
-                            android:text="@string/notification_year"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </RadioGroup-->
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
@@ -181,8 +201,8 @@
     </ScrollView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add_widget"
-        android:layout_margin="16dp"
+        android:id="@id/add_widget_fab"
+        android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:src="@drawable/check"
         android:layout_alignParentEnd="true"

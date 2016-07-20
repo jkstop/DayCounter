@@ -4,24 +4,22 @@
     android:padding="@dimen/widget_margin">
 
     <ImageView
-        android:id="@+id/appwidget_icon"
+        android:id="@id/widget_icon"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <TextView
-        android:id="@+id/appwidget_text"
+        android:id="@id/widget_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/appwidget_icon"
+        android:layout_alignTop="@id/widget_icon"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:singleLine="true"
-        android:layout_alignBottom="@id/appwidget_icon"
-        android:layout_margin="10dp"
-        android:text="@string/appwidget_text"
-        android:textColor="#ffffff"
+        android:layout_alignBottom="@id/widget_icon"
+        android:layout_margin="@dimen/widget_margin"
+        android:textColor="@android:color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
-
 
 </RelativeLayout>

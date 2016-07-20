@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <integer-array name="widget_styles">
+       <item>@drawable/checkbox_blank_circle</item>
+       <item>@drawable/checkbox_blank</item>
+       <item>@drawable/heart</item>
+       <item>@drawable/bandcamp</item>
+       <item>@drawable/battery</item>
+       <item>@drawable/bell</item>
+       <item>@drawable/bookmark</item>
+       <item>@drawable/briefcase</item>
+       <item>@drawable/clipboard</item>
+       <item>@drawable/folder</item>
+       <item>@drawable/hexagon</item>
+       <item>@drawable/label</item>
+       <item>@drawable/message</item>
+       <item>@drawable/xaml</item>
+       <item>@drawable/apple_mobileme</item>
+   </integer-array>
+
+    <integer-array name="widget_colors">
+        <item>@color/widget_color_1</item>
+        <item>@color/widget_color_2</item>
+        <item>@color/widget_color_3</item>
+        <item>@color/widget_color_4</item>
+        <item>@color/widget_color_5</item>
+        <item>@color/widget_color_6</item>
+        <item>@color/widget_color_7</item>
+        <item>@color/widget_color_8</item>
+        <item>@color/widget_color_9</item>
+        <item>@color/widget_color_10</item>
+    </integer-array>
+
+    <!--Card start date-->
+    <item name="card_start_date" type="id"/>
+    <item name="card_start_date_title" type="id"/>
+    <item name="card_start_date_count" type="id"/>
+
+    <!--Card widget design-->
+    <item name="card_widget_design" type="id"/>
+    <item name="card_widget_design_title" type="id"/>
+    <item name="card_widget_design_preview" type="id"/>
+    <item name="card_widget_design_container_style" type="id"/>
+    <item name="card_widget_design_style_subtitle" type="id"/>
+    <item name="card_widget_design_style_recycler" type="id"/>
+    <item name="card_widget_design_container_color" type="id"/>
+    <item name="card_widget_design_color_subtitle" type="id"/>
+    <item name="card_widget_design_color_recycler" type="id"/>
+    <item name="card_widget_design_container_text_size" type="id"/>
+    <item name="card_widget_design_text_size_subtitle" type="id"/>
+    <item name="card_widget_design_text_size_seekbar" type="id"/>
+    <item name="card_widget_design_selectable_item" type="id"/>
+
+    <!--Card notification settings-->
+    <item name="card_notification_settings" type="id"/>
+    <item name="card_notification_settings_title" type="id"/>
+    <item name="card_notification_settings_list" type="id"/>
+
+    <item name="add_widget_fab" type="id"/>
+
+    <item name="widget_icon" type="id"/>
+    <item name="widget_text" type="id"/>
+</resources>

@@ -2,13 +2,11 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/selector_row"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@drawable/selector_row">
 
     <android.support.v7.widget.AppCompatImageView
-        android:padding="8dp"
-        android:id="@+id/image_design_view"
-        app:srcCompat="@drawable/checkbox_blank_circle"
+        android:id="@id/card_widget_design_selectable_item"
+        android:padding="@dimen/vertical_content_padding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
