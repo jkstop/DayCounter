@@ -88,8 +88,6 @@ public class CountWidgetConfigureActivity extends AppCompatActivity{
             resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
             setResult(RESULT_OK, resultValue);
             finish();
-
-            System.out.println("widget must be created");
         }
     };
 
@@ -138,7 +136,7 @@ public class CountWidgetConfigureActivity extends AppCompatActivity{
         findViewById(R.id.card_start_date).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new selectDate().show(getSupportFragmentManager(),"datePicker");
+                new showSelectDateDialog().show(getSupportFragmentManager(),"datePicker");
             }
         });
 
@@ -204,7 +202,7 @@ public class CountWidgetConfigureActivity extends AppCompatActivity{
     }
 
 
-    public static class selectDate extends DialogFragment implements DatePickerDialog.OnDateSetListener{
+    public static class showSelectDateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener{
 
         Calendar calendar = Calendar.getInstance();
 

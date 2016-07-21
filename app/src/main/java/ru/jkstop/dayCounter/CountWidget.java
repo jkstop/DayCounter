@@ -86,7 +86,6 @@ public class CountWidget extends AppWidgetProvider {
 
         if (passedDays == 0){
             // 0 дней
-            sendNotif(widgetId, App.getContext().getResources().getString(R.string.notification_start_count));
         }else if (nowCalendar.get(Calendar.MONTH) == startDateCalendar.get(Calendar.MONTH) &&
                 nowCalendar.get(Calendar.DAY_OF_MONTH) == startDateCalendar.get(Calendar.DAY_OF_MONTH) &&
                 notifSettings.contains(CountWidgetConfigureActivity.NOTIF_1_Y)){

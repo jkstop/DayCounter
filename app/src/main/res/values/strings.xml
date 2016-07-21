@@ -11,9 +11,8 @@
     <string name="card_widget_design_title">Внешний вид</string>
     <string name="card_widget_design_subtitle_style">Стиль</string>
     <string name="card_widget_design_subtitle_color">Цвет</string>
-    <string name="card_widget_design_subtitle_text_size">Внешний вид</string>
+    <string name="card_widget_design_subtitle_text_size">Размер текста</string>
     <string name="card_notification_settings_title">Напоминания</string>
 
     <string name="notification_title">Сегодня важная дата!</string>
-    <string name="notification_start_count">Начат остчёт</string>
 </resources>
