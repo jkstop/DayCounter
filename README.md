@@ -1,5 +1,7 @@
 # DayCounter
 
+This project is not maintained anymore
+
 Виджет, отображающий количество дней, прошедших с определенной даты. Есть уведомления.
 
 ![alt tag](https://cloud.githubusercontent.com/assets/13080767/16989474/0895f2b4-4e9d-11e6-916c-ab97a4b8d0e3.png)
